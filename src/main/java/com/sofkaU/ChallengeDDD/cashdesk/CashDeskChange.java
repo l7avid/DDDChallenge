@@ -13,10 +13,12 @@ public class CashDeskChange extends EventChange {
 
         apply((CashierAdded event) -> {
             Cashier cashier = new Cashier(event.cashierID(), event.name(), event.yearsOfExperience());
+            cashDesk.cashier = cashier;
         });
 
         apply((ClientAdded event) -> {
             Client client = new Client(event.clientID(), event.name(), event.cc());
+
         });
 
         apply((PaymentAdded event) -> {

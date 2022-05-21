@@ -64,7 +64,8 @@ public class CashDesk extends AggregateEvent<CashDeskID> {
         appendChange(new CashierNameUpdated(cashDeskID, cashierID, name)).apply();
     }
 
-    public void updateCashierYearsOfExperience(CashDeskID cashDeskID, CashierID cashierID, YearsOfExperience yearsOfExperience){
+    public void updateCashierYearsOfExperience(CashDeskID cashDeskID, CashierID cashierID,
+                                               YearsOfExperience yearsOfExperience){
         Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(cashierID);
         Objects.requireNonNull(yearsOfExperience);

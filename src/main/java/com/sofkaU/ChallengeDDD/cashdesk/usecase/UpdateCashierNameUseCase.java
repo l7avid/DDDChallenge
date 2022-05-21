@@ -4,15 +4,16 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import com.sofkaU.ChallengeDDD.cashdesk.CashDesk;
-import com.sofkaU.ChallengeDDD.cashdesk.commands.AddPayment;
+import com.sofkaU.ChallengeDDD.cashdesk.commands.UpdateCashierName;
 
-public class AddPaymentUseCase extends UseCase<RequestCommand<AddPayment>, ResponseEvents>{
+public class UpdateCashierNameUseCase extends UseCase<RequestCommand<UpdateCashierName>, ResponseEvents> {
+
 
     @Override
-    public void executeUseCase(RequestCommand<AddPayment> addPaymentRequestCommand) {
-        var command = addPaymentRequestCommand.getCommand();
+    public void executeUseCase(RequestCommand<UpdateCashierName> updateCashierNameRequestCommand) {
+        var command = updateCashierNameRequestCommand.getCommand();
         var cashdesk = CashDesk.from(command.cashDeskID(), retrieveEvents(command.cashDeskID().value()));
-        cashdesk.addPayment(command.cashDeskID(), command.paymentID(), command.paymentMethod(), command.total());
+        cashdesk.updateCashierName(command.cashDeskID(), command.cashierID(),command.name());
 
         emit().onResponse(new ResponseEvents(cashdesk.getUncommittedChanges()));
     }

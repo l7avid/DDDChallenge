@@ -9,8 +9,6 @@ import com.sofkaU.ChallengeDDD.share.YearsOfExperience;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 public class CashDesk extends AggregateEvent<CashDeskID> {
 
@@ -35,61 +33,70 @@ public class CashDesk extends AggregateEvent<CashDeskID> {
         return cashDesk;
     }
 
-    public void addCashier(CashierID cashierID, Name name, YearsOfExperience yearsOfExperience){
+    public void addCashier(CashDeskID cashDeskID, CashierID cashierID, Name name, YearsOfExperience yearsOfExperience){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(cashierID);
         Objects.requireNonNull(name);
         Objects.requireNonNull(yearsOfExperience);
-        appendChange(new CashierAdded(cashierID, name, yearsOfExperience)).apply();
+        appendChange(new CashierAdded(cashDeskID, cashierID, name, yearsOfExperience)).apply();
     }
 
-    public void addClient(ClientID clientID, Name name, CC cc){
+    public void addClient(CashDeskID cashDeskID, ClientID clientID, Name name, CC cc){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(clientID);
         Objects.requireNonNull(name);
         Objects.requireNonNull(cc);
-        appendChange(new ClientAdded(clientID, name, cc)).apply();
+        appendChange(new ClientAdded(cashDeskID, clientID, name, cc)).apply();
     }
 
-    public void addPayment(PaymentID paymentID, PaymentMethod paymentMethod, Total total){
+    public void addPayment(CashDeskID cashDeskID, PaymentID paymentID, PaymentMethod paymentMethod, Total total){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(paymentID);
         Objects.requireNonNull(paymentMethod);
         Objects.requireNonNull(total);
-        appendChange(new PaymentAdded(paymentID, total, paymentMethod)).apply();
+        appendChange(new PaymentAdded(cashDeskID, paymentID, total, paymentMethod)).apply();
     }
 
-    public void updateCashierName(CashierID cashierID, Name name){
+    public void updateCashierName(CashDeskID cashDeskID, CashierID cashierID, Name name){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(cashierID);
         Objects.requireNonNull(name);
-        appendChange(new CashierNameUpdated(cashierID, name)).apply();
+        appendChange(new CashierNameUpdated(cashDeskID, cashierID, name)).apply();
     }
 
-    public void updateCashierYearsOfExperience(CashierID cashierID, YearsOfExperience yearsOfExperience){
+    public void updateCashierYearsOfExperience(CashDeskID cashDeskID, CashierID cashierID, YearsOfExperience yearsOfExperience){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(cashierID);
         Objects.requireNonNull(yearsOfExperience);
-        appendChange(new CashierYearsOfExperienceUpdated(cashierID, yearsOfExperience)).apply();
+        appendChange(new CashierYearsOfExperienceUpdated(cashDeskID, cashierID, yearsOfExperience)).apply();
     }
 
-    public void updateClientName(ClientID clientID, Name name){
+    public void updateClientName(CashDeskID cashDeskID, ClientID clientID, Name name){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(clientID);
         Objects.requireNonNull(name);
-        appendChange(new ClientNameUpdated(clientID, name)).apply();
+        appendChange(new ClientNameUpdated(cashDeskID, clientID, name)).apply();
     }
 
-    public void updateClientCC(ClientID clientID, CC cc){
+    public void updateClientCC(CashDeskID cashDeskID, ClientID clientID, CC cc){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(clientID);
         Objects.requireNonNull(cc);
-        appendChange(new ClientCCUpdated(clientID, cc)).apply();
+        appendChange(new ClientCCUpdated(cashDeskID, clientID, cc)).apply();
     }
 
-    public void updateTotalPayment(PaymentID paymentID, Total total){
+    public void updateTotalPayment(CashDeskID cashDeskID, PaymentID paymentID, Total total){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(paymentID);
         Objects.requireNonNull(total);
-        appendChange(new TotalToPayUpdated(paymentID, total)).apply();
+        appendChange(new TotalToPayUpdated(cashDeskID, paymentID, total)).apply();
     }
 
-    public void updatePaymentMethod(PaymentID paymentID, PaymentMethod paymentMethod){
+    public void updatePaymentMethod(CashDeskID cashDeskID, PaymentID paymentID, PaymentMethod paymentMethod){
+        Objects.requireNonNull(cashDeskID);
         Objects.requireNonNull(paymentID);
         Objects.requireNonNull(paymentMethod);
-        appendChange(new PaymentMethodUpdated(paymentID, paymentMethod)).apply();
+        appendChange(new PaymentMethodUpdated(cashDeskID, paymentID, paymentMethod)).apply();
     }
 
     public CompanyHeadquarter companyHeadquarter() {

@@ -12,7 +12,7 @@ public class AddCashierUseCase extends UseCase<RequestCommand<AddCashier>, Respo
     public void executeUseCase(RequestCommand<AddCashier> addCashierRequestCommand) {
         var command = addCashierRequestCommand.getCommand();
         var cashdesk = CashDesk.from(command.cashDeskID(), retrieveEvents(command.cashDeskID().value()));
-        cashdesk.addCashier(command.cashierID(), command.name(), command.yearsOfExperience());
+        cashdesk.addCashier(command.cashDeskID(), command.cashierID(), command.name(), command.yearsOfExperience());
 
         emit().onResponse(new ResponseEvents(cashdesk.getUncommittedChanges()));
     }

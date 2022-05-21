@@ -1,10 +1,7 @@
 package com.sofkaU.ChallengeDDD.cashdesk;
 
 import co.com.sofka.domain.generic.EventChange;
-import com.sofkaU.ChallengeDDD.cashdesk.events.CashDeskCreated;
-import com.sofkaU.ChallengeDDD.cashdesk.events.CashierAdded;
-import com.sofkaU.ChallengeDDD.cashdesk.events.ClientAdded;
-import com.sofkaU.ChallengeDDD.cashdesk.events.PaymentAdded;
+import com.sofkaU.ChallengeDDD.cashdesk.events.*;
 
 
 public class CashDeskChange extends EventChange {
@@ -26,6 +23,32 @@ public class CashDeskChange extends EventChange {
             Payment payment = new Payment(event.paymentID(), event.total(), event.paymentMethod());
         });
 
+        apply((CashierNameUpdated event) -> {
+            cashDesk.cashier().updateCashierName(event.name());
+        });
 
+        apply((CashierYearsOfExperienceUpdated event) -> {
+            cashDesk.cashier().updateCashierYearsOfExperience(event.yearsOfExperience());
+        });
+
+        apply((ClientNameUpdated event) -> {
+            cashDesk.client().updateClientName(event.name());
+        });
+
+        apply((ClientCCUpdated event) -> {
+            cashDesk.client().updateClientCC(event.cc());
+        });
+
+        apply((TotalToPayUpdated event) -> {
+            cashDesk.payment().updateTotal(event.total());
+        });
+
+        apply((PaymentMethodUpdated event) -> {
+            cashDesk.payment().updatePaymentMethod(event.paymentMethod());
+        });
+
+        apply((CompanyHeadquarterUpdated event) -> {
+            cashDesk.companyHeadquarter = event.companyHeadquarter();
+        });
     }
 }

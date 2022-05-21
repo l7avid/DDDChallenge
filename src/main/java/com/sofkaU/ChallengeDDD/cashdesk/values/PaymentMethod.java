@@ -1,4 +1,19 @@
 package com.sofkaU.ChallengeDDD.cashdesk.values;
 
-public class PaymentMethod {
+import co.com.sofka.domain.generic.ValueObject;
+
+import java.util.Objects;
+
+public class PaymentMethod implements ValueObject<String> {
+
+    private final String value;
+
+    public PaymentMethod(String value) {
+        this.value = Objects.requireNonNull(value);
+    }
+
+    @Override
+    public String value() {
+        return value;
+    }
 }

@@ -12,7 +12,7 @@ public class CashDeskCreated extends DomainEvent {
         this.companyHeadquarter = companyHeadquarter;
     }
 
-    public CompanyHeadquarter getCompanyHeadquarter() {
+    public CompanyHeadquarter companyHeadquarter() {
         return companyHeadquarter;
     }
 }

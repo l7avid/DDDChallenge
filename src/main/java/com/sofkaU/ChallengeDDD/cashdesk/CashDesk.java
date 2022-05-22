@@ -100,6 +100,12 @@ public class CashDesk extends AggregateEvent<CashDeskID> {
         appendChange(new PaymentMethodUpdated(cashDeskID, paymentID, paymentMethod)).apply();
     }
 
+    public void updateCompanyHeadquarter(CashDeskID cashDeskID, CompanyHeadquarter companyHeadquarter){
+        Objects.requireNonNull(cashDeskID);
+        Objects.requireNonNull(companyHeadquarter);
+        appendChange(new CompanyHeadquarterUpdated(cashDeskID, companyHeadquarter)).apply();
+    }
+
     public CompanyHeadquarter companyHeadquarter() {
         return companyHeadquarter;
     }

@@ -4,7 +4,7 @@ import co.com.sofka.domain.generic.Identity;
 
 public class CashierID extends Identity {
 
-    public CashierID(String uuid) {
+    private CashierID(String uuid) {
         super(uuid);
     }
 

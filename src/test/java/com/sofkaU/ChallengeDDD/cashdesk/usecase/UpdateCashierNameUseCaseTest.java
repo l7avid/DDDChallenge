@@ -32,13 +32,13 @@ class UpdateCashierNameUseCaseTest {
 
     @Test
     void updateCashierName(){
-        var command = new UpdateCashierName(CashDeskID.of("ROOT_ID"),
+        var command = new UpdateCashierName(CashDeskID.of(ROOT_ID),
                 CashierID.of("1"),
                 new Name("Marcos"));
 
         var useCase = new UpdateCashierNameUseCase();
 
-        Mockito.when(repository.getEventsBy("ROOT_ID")).thenReturn(List.of(
+        Mockito.when(repository.getEventsBy(ROOT_ID)).thenReturn(List.of(
                 new CashDeskCreated(new CompanyHeadquarter("Medellin")),
                 new CashierAdded(CashDeskID.of("2"),
                         CashierID.of("1"),
